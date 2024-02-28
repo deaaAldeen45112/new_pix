@@ -12,8 +12,37 @@ export class CategoryService extends GenericService {
        
     }
     
+
+
+    static getCategoryWithSubcategoriesByParentId(id) {
+        return fetch(en.host + this.entity + `/getCategoryWithSubcategoriesByParentId/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => this.handleResponse(res));
+    }
     static getCategoriesByParentId(id) {
         return fetch(en.host + this.entity + `/getCategoriesByParentId?id=${id==null?'':id}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => this.handleResponse(res));
+    }
+    static getAllCategoriesWithSubcategoriesAndProducts() {
+        return fetch(en.host + this.entity + `/getAllCategoriesWithSubcategoriesAndProducts`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => this.handleResponse(res));
+    }
+    static getAllCategoriesWithProductsByParentId(id) {
+        return fetch(en.host + this.entity + `/getAllCategoriesWithProductsByParentId/${id}`, {
             method: "GET",
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -41,7 +70,15 @@ export class CategoryService extends GenericService {
         .then(res => this.handleResponse(res));
     }
 
-
-
+    static getRandomCategoryWithSubcategories(id) {
+        return fetch(en.host + this.entity + `/getRandomCategoryWithSubcategories/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => this.handleResponse(res));
+    }
+    
 
 }

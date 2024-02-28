@@ -9,7 +9,17 @@ export class ProductService extends GenericService {
     static plural="products";
     static pluralCaptial="Products";
     static entityCaptial="Product";
+    
 
+    static getProductByCategoryId(id) {
+        return fetch(en.host + this.entity + `/getProductByCategoryId`+`/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        .then(res => this.handleResponse(res));
+    }
     static getProductWithParentIdById(id) {
         return fetch(en.host + this.entity + `/getProductWithParentIdById`+`/${id}`, {
             method: "GET",

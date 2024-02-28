@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Livello_1" data-name="Livello 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 44 44">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-3 {
+        fill: #009146;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: #cd2b37;
+      }
+    </style>
+    <clipPath id="clippath">
+      <circle class="cls-1" cx="22" cy="22" r="21.97"/>
+    </clipPath>
+  </defs>
+  <g class="cls-2">
+    <g>
+      <rect class="cls-3" x="-.5" y="-.5" width="15" height="45"/>
+      <rect class="cls-5" x="29.5" y="-.5" width="15" height="45"/>
+      <rect class="cls-4" x="14.5" y="-.5" width="15" height="45"/>
+    </g>
+  </g>
+</svg>

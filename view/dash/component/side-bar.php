@@ -88,7 +88,13 @@
               </a>
             </li>  
            
-         
+                <!-- Layouts -->
+                <li class="menu-item">
+              <a href="home-page.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-category"></i>
+                <div data-i18n="Basic">Home</div>
+              </a>
+            </li>  
          
           </ul>
           
