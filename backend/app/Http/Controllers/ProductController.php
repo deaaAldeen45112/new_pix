@@ -76,6 +76,22 @@ public function __construct(ProductRepository $productRepository)
             return response()->json(['error' => 'Product not found'], 404);
         }
     }
+
+
+    public function getProductByCategoryId($id)
+    {
+
+        $product=   DB::table('product')
+            ->where('product.category_id','=',$id)
+            ->get();
+
+
+        if ($product) {
+            return response()->json($product, 200);
+        } else {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+    }
     public function createProduct(Request $product)
     {
         return $this->_productRepository->createProduct($product);

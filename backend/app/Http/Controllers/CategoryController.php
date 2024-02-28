@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Model\ApiResponse;
+use App\Models\Category;
 use App\Models\CategoryImgSlider;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
@@ -91,8 +92,30 @@ class CategoryController extends Controller
         }
     }
 
+    public function getAllCategoriesWithProductsByParentId($parentId)
+    {
+        $categories = Category::with('products')->where('parent_id', $parentId)->get();
 
+        return response()->json($categories);
+    }
+    public function getAllCategoriesWithSubcategoriesAndProducts()
+    {   // Enable query logging
+       // DB::enableQueryLog();
+        // Retrieve all top-level categories (categories without a parent_id)
+        $categories = Category::whereNull('parent_id')->with('subcategories.products')->get();;
+        // Get the SQL query without executing it
+        // Get the executed queries
+        //$queries = DB::getQueryLog();
 
+        // Disable query logging to prevent interference with subsequent queries
+      //  DB::disableQueryLog();
+
+        // Dump and die to print the SQL queries
+        //dd($queries);
+        // Now $categories contains top-level categories with their subcategories
+
+        return response()->json($categories);
+    }
     public  function uploadImagesSlider(Request $req)
     {
 
@@ -142,5 +165,57 @@ class CategoryController extends Controller
         return $categoryImgsSlider;
     }
 
+    public function getRandomCategoryWithSubcategories($id)
+{   // Enable query logging
+    // DB::enableQueryLog();
+    // Retrieve all top-level categories (categories without a parent_id)
+    $categories = Category::whereNull('parent_id')->where('category_id','!=',$id)->with('subcategories')->get();;
+    // Get the SQL query without executing it
+    // Get the executed queries
+    //$queries = DB::getQueryLog();
+    if ($categories->isNotEmpty()) {
+        // Get a random index
+        $randomIndex = rand(0, $categories->count() - 1);
 
+        // Get the category at the random index
+        $randomCategory = $categories[$randomIndex];
+        return response()->json($randomCategory);
+        // Now $randomCategory contains a randomly selected category
+        // You can access its properties like $randomCategory->id, $randomCategory->name, etc.
+    } else {
+
+        return  response()->json(" not found categories");
+        // Handle the case when there are no categories
+    }
+    // Disable query logging to prevent interference with subsequent queries
+    //  DB::disableQueryLog();
+
+    // Dump and die to print the SQL queries
+    //dd($queries);
+    // Now $categories contains top-level categories with their subcategories
+
+
+}
+
+    public function getCategoryWithSubcategoriesByParentId($categoryId)
+    {   // Enable query logging
+        // DB::enableQueryLog();
+        // Retrieve all top-level categories (categories without a parent_id)
+        $categories = Category::whereNull('parent_id')->where('category_id','=',$categoryId)->with('subcategories')->first();;
+        // Get the SQL query without executing it
+        // Get the executed queries
+
+            return response()->json($categories);
+            // Now $randomCategory contains a randomly selected category
+            // You can access its properties like $randomCategory->id, $randomCategory->name, etc.
+
+        // Disable query logging to prevent interference with subsequent queries
+        //  DB::disableQueryLog();
+
+        // Dump and die to print the SQL queries
+        //dd($queries);
+        // Now $categories contains top-level categories with their subcategories
+
+
+    }
 }

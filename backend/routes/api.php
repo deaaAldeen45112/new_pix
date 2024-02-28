@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(ProductController::class)
     ->prefix('product')
     ->group(function () {
+        Route::get('/getProductByCategoryId/{id}', 'getProductByCategoryId');
         Route::get('/getProductWithParentIdById/{id}', 'getProductWithParentIdById');
         Route::get('/getProductById/{id}', 'getProductById');
         Route::get('/getPaginatedProducts', 'getPaginatedProducts');
@@ -42,6 +43,8 @@ Route::controller(ProductController::class)
 Route::controller(CategoryController::class)
     ->prefix('category')
     ->group(function () {
+        Route::get('/getAllCategoriesWithSubcategoriesAndProducts','getAllCategoriesWithSubcategoriesAndProducts');
+        Route::get('/getAllCategoriesWithProductsByParentId/{parentId}','getAllCategoriesWithProductsByParentId');
         Route::get('/getCategoriesByParentId','getCategoriesByParentId');
         Route::get('/getPaginatedCategories', 'getPaginatedCategories');
         Route::get('/getPaginatedProductsWithCategory', 'getPaginatedProductsWithCategory');
@@ -49,6 +52,8 @@ Route::controller(CategoryController::class)
         Route::get('/getCategoryImgsSliderByCategoryId/{categoryId}', 'getCategoryImgsSliderByCategoryId');
         Route::post('/createCategory','createCategory');
         Route::post('/uploadImage','uploadImage');
+        Route::get('/getRandomCategoryWithSubcategories/{id}', 'getRandomCategoryWithSubcategories');
+        Route::get('/getCategoryWithSubcategoriesByParentId/{id}', 'getCategoryWithSubcategoriesByParentId');
         Route::post('/uploadImagesSlider','uploadImagesSlider');
         Route::put('/updateCategory','updateCategory');
         Route::delete('/deleteCategoryById/{id}','deleteCategoryById');
@@ -112,4 +117,15 @@ Route::controller(\App\Http\Controllers\DiscountWithQuantityController::class)
         Route::post('/createDiscountWithQuantity','createDiscountWithQuantity');
         Route::put('/updateDiscountWithQuantity','updateDiscountWithQuantity');
         Route::delete('/deleteDiscountWithQuantityById/{id}','deleteDiscountWithQuantityById');
+    });
+
+
+
+Route::controller(\App\Http\Controllers\HomeController::class)
+    ->prefix('home')
+    ->group(function () {
+        Route::post('/uploadImagesSlider','uploadImagesSlider');
+        Route::get('/getImgsSlidersByType/{type}', 'getImgsSlidersByType');
+
+        Route::delete('/deleteImgSliders/{id}','deleteImgSliders');
     });
